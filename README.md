@@ -1,7 +1,9 @@
 # bemostore-mobile
 
-## Muhammad Fawwaz Edsa Fatin Setiawan
-## 2306275582
+<h2>
+Muhammad Fawwaz Edsa Fatin Setiawan
+2306275582
+</h2>
 
 <details>
   <summary>Tugas 7: Elemen Dasar Flutter</summary>
