@@ -1,10 +1,13 @@
 # bemostore-mobile
 
+## Muhammad Fawwaz Edsa Fatin Setiawan
+## 2306275582
+
 <details>
   <summary>Tugas 7: Elemen Dasar Flutter</summary>
 
   #  Jelaskan apa yang dimaksud dengan stateless widget dan stateful widget, dan jelaskan perbedaan dari keduanya.
-  ## Stateless Widget
+  ### Stateless Widget
   Stateless widget adalah widget yang tidak memiliki status yang bisa berubah selama siklus hidup widget itu. Artinya, begitu widget dibuat, dia tidak akan berubah meskipun ada perubahan data atau aksi dari   pengguna. Stateless widget cocok untuk elemen UI yang statis, seperti teks, gambar, atau elemen layout yang tidak akan berubah.
   Contoh:
   ```dart
@@ -16,7 +19,7 @@
   }
   ```
 
-  ## Stateful Widget
+  ### Stateful Widget
   Stateful widget adalah widget yang memiliki status dan bisa berubah selama siklus hidup widget. Ketika statusnya berubah, widget akan dibangun ulang untuk mencerminkan perubahan tersebut. Widget ini biasanya dipakai kalau ada elemen UI yang bisa diubah oleh pengguna, seperti form input, tombol yang berubah warna saat ditekan, atau counter.
   Contoh:
   ```dart
@@ -112,4 +115,115 @@ Contoh variabel yang bisa terpengaruh:
 #  Jelaskan perbedaan antara `const` dengan `final`.
 - const: Nilai tetap selama compile-time. Artinya, jika kita menetapkan const, nilai ini tidak akan pernah berubah, bahkan sebelum aplikasi dijalankan.
 - final: Nilai tetap selama runtime. Artinya, nilai tersebut hanya bisa ditetapkan sekali, tapi penentuannya bisa dilakukan saat runtime (misalnya hasil dari suatu fungsi atau input pengguna).
+
+#  Jelaskan bagaimana cara kamu mengimplementasikan checklist-checklist di atas.
+
+### Membuat projek flutter
+jalankan command berikut pada terminal dengna direktori dimana projek ingin disimpan
+```
+flutter create bemostore_app
+cd /bemostore_app
+```
+
+### Merapikan struktur proyek
+Buat file bernama `menu.dart` pada direktori yang sama dengan file bernama `main.dart`, kemudian pindahkan class `MyHomePage` dan `_MyHomePageState` dari `main.dart` ke `menu.dart`.
+Tambahkan import berikut pada `menu.dart`
+```dart
+import 'package:flutter/material.dart';
+```
+dan juga import berikut pada `main.dart`
+```dart
+import 'package:bemostore_app/menu.dart';
+```
+
+### Mengubah ColorScheme
+```dart
+        colorScheme: ColorScheme.fromSwatch(
+              primarySwatch: Colors.blueGrey,
+        ).copyWith(secondary: Colors.blueGrey[900]),      
+      )
+```
+
+### Mmebuat class baru bernama ItemHomepage yang berisi atribut-atribut dari card yang akan dibuat
+Tambahkan pada `menu.dart`
+```dart
+class ItemHomepage {
+     final String name;
+     final IconData icon;
+     final Color color; 
+
+     ItemHomepage(this.name, this.icon, this.color);
+ }
+```
+
+### Membuat list of ItemHomepage yang berisi tombol-tombol yang akan tambahkan pada class MyHomePage.
+```dart
+class MyHomePage extends StatelessWidget {
+    ...
+    final String npm = '2306275582'; // NPM
+    final String name = 'Muhammad Fawwaz Edsa Fatin Setiawan '; // Nama
+    final String className = 'PBP D'; // Kelas
+    final List<ItemHomepage> items = [
+    ItemHomepage("Lihat Daftar Produk", Icons.mood, const Color.fromARGB(255, 41, 53, 57)!),
+    ItemHomepage("Tambah Produk", Icons.add, const Color.fromARGB(255, 37, 48, 38)),
+    ItemHomepage("Logout", Icons.logout, const Color.fromARGB(255, 52, 48, 42)),
+    ....
+}
+```
+
+### Menampilkan SnackBar
+```dart
+class ItemCard extends StatelessWidget {
+  // Menampilkan kartu dengan ikon dan nama.
+
+  final ItemHomepage item; 
+  
+  const ItemCard(this.item, {super.key}); 
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      // Menentukan warna latar belakang dari tema aplikasi.
+      color: item.color,
+      // Membuat sudut kartu melengkung.
+      borderRadius: BorderRadius.circular(12),
+      
+      child: InkWell(
+        // Aksi ketika kartu ditekan.
+        onTap: () {
+          // Menampilkan pesan SnackBar saat kartu ditekan.
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(
+              SnackBar(content: Text("Kamu telah menekan tombol ${item.name}!"))
+            );
+        },
+        // Container untuk menyimpan Icon dan Text
+        child: Container(
+          padding: const EdgeInsets.all(8),
+          child: Center(
+            child: Column(
+              // Menyusun ikon dan teks di tengah kartu.
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  item.icon,
+                  color: Colors.white,
+                  size: 30.0,
+                ),
+                const Padding(padding: EdgeInsets.all(3)),
+                Text(
+                  item.name,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(color: Colors.white),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  } 
+}
+```
 </details>
