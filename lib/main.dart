@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:bemostore_app/menu.dart';
+import 'package:bemostore_app/screens/menu.dart';
 
 void main() {
   runApp(const MyApp());
@@ -30,8 +30,8 @@ class MyApp extends StatelessWidget {
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
         colorScheme: ColorScheme.fromSwatch(
-              primarySwatch: Colors.blueGrey,
-        ).copyWith(secondary: Colors.blueGrey[900]),      
+              primarySwatch: Colors.teal,
+        ).copyWith(secondary: Colors.grey[900]),      
       ),
       home: MyHomePage(),
     );
