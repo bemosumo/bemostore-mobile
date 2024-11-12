@@ -230,3 +230,14 @@ class ItemCard extends StatelessWidget {
 }
 ```
 </details>
+
+<details>
+  <summary>Tugas 8: Flutter Navigation, Layouts, Forms, and Input Elements</summary>
+
+  # Apa kegunaan const di Flutter? Jelaskan apa keuntungan ketika menggunakan const pada kode Flutter. Kapan sebaiknya kita menggunakan const, dan kapan sebaiknya tidak digunakan?
+  Penggunaan `const` memiliki peran penting dalam menjaga efisiensi dan performa aplikasi. Ketika kita mendeklarasikan objek sebagai `const`, objek tersebut menjadi immutable atau tidak dapat diubah. Ini berarti Flutter hanya membuat objek tersebut satu kali dan menyimpannya dalam memori sepanjang aplikasi berjalan, mengurangi kebutuhan akan alokasi memori tambahan. Penggunaan `const` ini sangat berguna pada widget atau nilai yang bersifat statis dan tidak akan berubah, seperti teks atau ikon tetap. Keuntungan utama dari `const` adalah efisiensi memori dan peningkatan performa render, karena objek yang bersifat `const` tidak perlu di-render ulang, menghemat waktu saat aplikasi berjalan. Selain itu, `const` juga memberikan stabilitas dengan memastikan bahwa data tidak berubah secara tak terduga selama runtime, mengurangi risiko error. Namun, `const` tidak ideal untuk objek atau widget yang berubah selama aplikasi berjalan, seperti item dalam `ListView` yang diambil dari server atau widget yang dipengaruhi oleh interaksi pengguna, karena perubahan tersebut akan menyebabkan error jika dipaksa menjadi `const`.
+
+# Jelaskan dan bandingkan penggunaan Column dan Row pada Flutter. Berikan contoh implementasi dari masing-masing layout widget ini!
+Dalam penataan layout, widget `Column` dan `Row` adalah dua pilihan utama yang digunakan berdasarkan orientasi elemen. `Column` menata widget secara vertikal dari atas ke bawah dan cocok untuk tampilan yang membutuhkan elemen bertumpuk, seperti daftar item atau form UI. Sebaliknya, `Row` menata widget secara horizontal dari kiri ke kanan, cocok untuk toolbar atau tombol yang disusun berdampingan. Keduanya memiliki properti `mainAxisAlignment` dan `crossAxisAlignment` yang memungkinkan pengaturan posisi anak-anak widget di sepanjang sumbu utama dan sumbu silang. Misalnya, `Column` dapat diatur agar elemen-elemen di dalamnya berada di tengah atau disejajarkan ke kiri, sementara `Row` dapat membuat elemen-elemen memiliki jarak sama rata di sepanjang sumbu horizontal. Singkatnya, pemilihan antara `Column` dan `Row` tergantung pada arah susunan yang diinginkan, sementara penggunaan `const` yang bijak pada widget atau value statis akan membantu meningkatkan efisiensi aplikasi Flutter secara keseluruhan.
+
+</details>
