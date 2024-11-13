@@ -234,10 +234,115 @@ class ItemCard extends StatelessWidget {
 <details>
   <summary>Tugas 8: Flutter Navigation, Layouts, Forms, and Input Elements</summary>
 
-  # Apa kegunaan const di Flutter? Jelaskan apa keuntungan ketika menggunakan const pada kode Flutter. Kapan sebaiknya kita menggunakan const, dan kapan sebaiknya tidak digunakan?
-  Penggunaan `const` memiliki peran penting dalam menjaga efisiensi dan performa aplikasi. Ketika kita mendeklarasikan objek sebagai `const`, objek tersebut menjadi immutable atau tidak dapat diubah. Ini berarti Flutter hanya membuat objek tersebut satu kali dan menyimpannya dalam memori sepanjang aplikasi berjalan, mengurangi kebutuhan akan alokasi memori tambahan. Penggunaan `const` ini sangat berguna pada widget atau nilai yang bersifat statis dan tidak akan berubah, seperti teks atau ikon tetap. Keuntungan utama dari `const` adalah efisiensi memori dan peningkatan performa render, karena objek yang bersifat `const` tidak perlu di-render ulang, menghemat waktu saat aplikasi berjalan. Selain itu, `const` juga memberikan stabilitas dengan memastikan bahwa data tidak berubah secara tak terduga selama runtime, mengurangi risiko error. Namun, `const` tidak ideal untuk objek atau widget yang berubah selama aplikasi berjalan, seperti item dalam `ListView` yang diambil dari server atau widget yang dipengaruhi oleh interaksi pengguna, karena perubahan tersebut akan menyebabkan error jika dipaksa menjadi `const`.
+#  Apa kegunaan const di Flutter? Jelaskan apa keuntungan ketika menggunakan const pada kode Flutter. Kapan sebaiknya kita menggunakan const, dan kapan sebaiknya tidak digunakan?
+Di Flutter, `const` digunakan untuk mendeklarasikan objek yang sifatnya konstan dan tidak akan berubah sepanjang masa pakai aplikasi. Dengan mendeklarasikan widget atau nilai sebagai `const`, Flutter hanya membuat satu instance dari objek tersebut di memori. Ini mengurangi kebutuhan alokasi memori yang berulang dan meningkatkan performa aplikasi, karena objek yang didefinisikan sebagai `const` tidak akan dibuat ulang. Contohnya adalah teks atau ikon tetap, seperti di dalam `AppBar` atau item statis dalam list.
 
-# Jelaskan dan bandingkan penggunaan Column dan Row pada Flutter. Berikan contoh implementasi dari masing-masing layout widget ini!
-Dalam penataan layout, widget `Column` dan `Row` adalah dua pilihan utama yang digunakan berdasarkan orientasi elemen. `Column` menata widget secara vertikal dari atas ke bawah dan cocok untuk tampilan yang membutuhkan elemen bertumpuk, seperti daftar item atau form UI. Sebaliknya, `Row` menata widget secara horizontal dari kiri ke kanan, cocok untuk toolbar atau tombol yang disusun berdampingan. Keduanya memiliki properti `mainAxisAlignment` dan `crossAxisAlignment` yang memungkinkan pengaturan posisi anak-anak widget di sepanjang sumbu utama dan sumbu silang. Misalnya, `Column` dapat diatur agar elemen-elemen di dalamnya berada di tengah atau disejajarkan ke kiri, sementara `Row` dapat membuat elemen-elemen memiliki jarak sama rata di sepanjang sumbu horizontal. Singkatnya, pemilihan antara `Column` dan `Row` tergantung pada arah susunan yang diinginkan, sementara penggunaan `const` yang bijak pada widget atau value statis akan membantu meningkatkan efisiensi aplikasi Flutter secara keseluruhan.
+Contoh penggunaan `const`:
+```dart
+const Text('Welcome to Bemostore');
+const Icon(Icons.list_alt_rounded);
+```
+
+Dengan menggunakan `const`, kita memberitahu Flutter bahwa objek ini bersifat statis dan tidak perlu dibuat ulang, sehingga mempercepat proses rendering dan menghemat memori.
+
+Sebaiknya, `const` digunakan pada widget atau variabel yang bersifat tetap dan tidak akan berubah, misalnya pada widget `Text` atau `Icon` yang tampilannya tidak berubah selama aplikasi berjalan. Ini juga berlaku untuk widget yang terletak dalam hierarki yang jarang diubah. Sebaliknya, `const` tidak cocok untuk objek yang bersifat dinamis atau berubah, seperti elemen yang bergantung pada input pengguna atau data dari API. Jika widget berubah, penggunaan `const` akan menyebabkan error karena Flutter tidak dapat membuat ulang objek tersebut.
+
+#  Jelaskan dan bandingkan penggunaan Column dan Row pada Flutter. Berikan contoh implementasi dari masing-masing layout widget ini!
+`Column` dan `Row` adalah widget utama dalam Flutter untuk menata elemen UI secara vertikal atau horizontal. `Column` digunakan untuk menampilkan widget secara vertikal dari atas ke bawah, dan sering digunakan untuk menata elemen-elemen bertumpuk seperti daftar item atau form. Di sisi lain, `Row` menata widget secara horizontal dari kiri ke kanan, cocok untuk toolbar atau item yang perlu tampil berdampingan.
+
+Contoh Implementasi `Column`:
+```dart
+Column(
+  crossAxisAlignment: CrossAxisAlignment.center,
+  children: [
+    const Text('Welcome to Bemostore', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+    const SizedBox(height: 16.0),
+    ElevatedButton(
+      onPressed: () {},
+      child: const Text('Explore Products'),
+    ),
+  ],
+);
+```
+Pada contoh ini, `Column` digunakan untuk menyusun `Text` dan `Button` secara vertikal.
+
+Contoh Implementasi `Row`:
+```dart
+Row(
+  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  children: [
+    Icon(Icons.home),
+    Icon(Icons.search),
+    Icon(Icons.settings),
+  ],
+);
+```
+Di sini, `Row` menata beberapa `Icon` secara horizontal dengan jarak yang sama.
+
+#  Sebutkan apa saja elemen input yang kamu gunakan pada halaman form yang kamu buat pada tugas kali ini. Apakah terdapat elemen input Flutter lain yang tidak kamu gunakan pada tugas ini? Jelaskan!
+Pada halaman form di tugas ini, saya menggunakan beberapa elemen input utama yaitu `TextFormField`. Elemen ini digunakan untuk menerima masukan pengguna untuk produk, deskripsi, dan harga produk. `TextFormField` juga dilengkapi dengan validator untuk memastikan bahwa nilai yang dimasukkan memenuhi syarat tertentu, seperti tidak boleh kosong dan harga harus berupa angka. Validator ini memberikan umpan balik yang penting kepada pengguna.
+
+Selain `TextFormField`, Flutter juga memiliki elemen input lain seperti `Checkbox`, `RadioButton`, `Switch`, dan `Slider`. Namun, elemen-elemen ini tidak digunakan dalam tugas ini karena form ini hanya membutuhkan masukan berupa teks.
+
+Contoh Implementasi `TextFormField`:
+```dart
+TextFormField(
+  decoration: InputDecoration(
+    hintText: "Masukkan Nama Produk",
+    labelText: "Produk",
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(5.0),
+    ),
+  ),
+  onChanged: (String? value) {
+    setState(() {
+      _product = value!;
+    });
+  },
+  validator: (String? value) {
+    if (value == null || value.isEmpty) {
+      return "Produk tidak boleh kosong!";
+    }
+    return null;
+  },
+);
+```
+Pada contoh di atas, `TextFormField` digunakan untuk input produk dengan validator yang memastikan kolom ini tidak kosong.
+
+#  Bagaimana cara kamu mengatur tema (theme) dalam aplikasi Flutter agar aplikasi yang dibuat konsisten? Apakah kamu mengimplementasikan tema pada aplikasi yang kamu buat?
+Dalam Flutter, tema aplikasi diatur melalui `ThemeData` yang didefinisikan di dalam `MaterialApp`. Dengan menggunakan `ThemeData`, kita bisa menentukan warna utama, warna latar belakang, serta gaya teks yang seragam untuk seluruh aplikasi. Tema yang konsisten ini membantu aplikasi memiliki tampilan yang seragam, sehingga lebih enak dilihat dan user-friendly.
+
+Pada tugas ini, saya telah mengatur tema di dalam `MaterialApp`, seperti warna primer yang ditetapkan pada `AppBar` dan elemen lainnya agar seluruh aplikasi memiliki skema warna yang serupa.
+
+Contoh Implementasi Tema:
+```dart
+MaterialApp(
+  theme: ThemeData(
+    colorScheme: ColorScheme.fromSwatch(
+      primarySwatch: Colors.teal,
+    ).copyWith(secondary: Colors.grey[900]),
+  ),
+  home: MyHomePage(),
+);
+```
+Di sini, warna utama aplikasi diatur dengan `primarySwatch`, yang secara otomatis akan diterapkan pada elemen-elemen yang menggunakan tema, seperti `AppBar`.
+
+#  Bagaimana cara kamu menangani navigasi dalam aplikasi dengan banyak halaman pada Flutter?
+Pada aplikasi Flutter dengan banyak halaman, `Navigator` digunakan untuk menangani navigasi antar halaman. `Navigator` berfungsi sebagai pengelola stack halaman, yang memungkinkan kita untuk menambah atau mengganti halaman di atas halaman saat ini. Dalam tugas ini, saya menggunakan `Navigator.pushReplacement` untuk mengganti halaman yang sedang dibuka dengan halaman lain ketika pengguna memilih menu pada drawer. Metode ini membuat pengguna berpindah halaman tanpa kembali ke halaman sebelumnya, memberikan pengalaman navigasi yang lebih mulus.
+
+Contoh Implementasi Navigasi:
+```dart
+ListTile(
+  leading: const Icon(Icons.add_shopping_cart_outlined),
+  title: const Text('Tambah Produk'),
+  onTap: () {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const ProductEntryFormPage()),
+    );
+  },
+);
+```
+Pada contoh di atas, `Navigator.pushReplacement` digunakan untuk mengarahkan pengguna ke halaman `ProductEntryFormPage` saat mereka mengetuk item menu "Tambah Produk".
 
 </details>
