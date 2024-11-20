@@ -5,9 +5,11 @@ import 'package:bemostore_app/widgets/left_drawer.dart';
 
 class MyHomePage extends StatelessWidget {
     MyHomePage({super.key});
+
     final String npm = '2306275582'; // NPM
     final String name = 'Muhammad Fawwaz Edsa Fatin Setiawan '; // Nama
     final String className = 'PBP D'; // Kelas
+
     final List<ItemHomepage> items = [
     ItemHomepage("Lihat Daftar Produk", Icons.list_alt_rounded, const Color.fromARGB(255, 67, 91, 100)!),
     ItemHomepage("Tambah Produk", Icons.add_shopping_cart, const Color.fromARGB(255, 66, 101, 69)),
